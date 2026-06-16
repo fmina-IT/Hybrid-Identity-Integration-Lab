@@ -1,7 +1,4 @@
 # Hybrid Identity Integration Lab
-> ⚠️ **Project Status: Under Active Development**
-> This lab is currently being built and documented. Please check back for updates as I progress through hybrid sync configuration and identity governance testing.
-
 
 ## 📝 Project Summary
 This project bridges the gap between on premises Active Directory and modern cloud based identity management. By synchronising the `LAB.local` environment with Microsoft Entra ID, I architected a hybrid identity ecosystem that supports seamless authentication and centralised management. This lab demonstrates advanced skills in identity lifecycle management, UPN transformation, hybrid device joining, and cloud native synchronisation troubleshooting.
@@ -11,8 +8,7 @@ This project bridges the gap between on premises Active Directory and modern clo
 ## 📌 Project Roadmap
 * **Phase 1: Hybrid Readiness** — Domain verification, UPN suffix configuration, and preparation of the AD environment for synchronisation.
 * **Phase 2: Entra Connect Integration** — Deployment and configuration of Microsoft Entra Connect to bridge local Active Directory with the M365 tenant.
-* **Phase 2.5: Identity Functional Testing** — Validate that synchronised identities are fully operational and that the SSO configuration provides a seamless authentication experience for end users.
-* **Phase 3: Hybrid Identity & Device Management** — Implementing Hybrid Join, conditional access testing, and verifying identity synchronisation.
+* **Phase 3: Hybrid Identity & SSO Validation** — Validate that synchronised identities are correctly provisioned and that Hybrid Microsoft Entra ID Join and Seamless SSO configurations provide a seamless authentication experience.
 
 ## 🚀 Technical Competencies
 * **Hybrid Identity Governance:** Expertise in AD-to-Entra synchronisation, UPN transformations, and attribute level object management.
@@ -199,13 +195,14 @@ Following the successful configuration, I performed the following verification a
 ![Image Description](https://i.imgur.com/87EMjkb.png)
 ---
 
-## 🧪 Phase 3: Identity Functional Testing
+## ☁️ Phase 3: Hybrid Identity & SSO Validation
 ---
-**Objective:** Validate that synchronised identities are fully operational and that the SSO configuration provides a seamless authentication experience.
+**Objective:** Validate that synchronised identities are correctly provisioned and that Hybrid Microsoft Entra ID Join and Seamless SSO configurations provide a seamless authentication experience.
 
 ### 3.1 New User Synchronisation
 I created a test user account (`Sync Test`) and initiated a manual delta synchronisation.
 * **Command:** `Start-ADSyncSyncCycle -PolicyType Delta`
+![Image Description](https://i.imgur.com/yc8maEs.png)
 
 ### 3.2 End-to-End Single Sign-On SSO Validation
 To verify the successful implementation of Hybrid Microsoft Entra ID Join and Seamless Single Sign-On (SSO), the following validation steps were performed:
@@ -213,9 +210,9 @@ To verify the successful implementation of Hybrid Microsoft Entra ID Join and Se
 * **Device Identity**: Validated device trust via dsregcmd /status (Confirmed AzureAdJoined: YES).
 * **User SSO Session**: Validated user SSO session via dsregcmd /status (Confirmed AzureAdPrt: YES).
 * **Service Access**: Validated service access by navigating to m365.com and confirming automatic sign in without manual credential entry.
-  
 * **Result:** The system authenticated automatically using domain credentials without requiring manual password entry.
-
+![Image Description](https://i.imgur.com/vLGY1W1.png)
+![Image Description](https://i.imgur.com/5I6ZWyC.png)
 ---
 
 ## 🛠️ Troubleshooting & Operational Resilience
