@@ -8,7 +8,7 @@ This project bridges the gap between on premises Active Directory and modern clo
 ## 📌 Project Roadmap
 * **Phase 1: Hybrid Readiness** — Domain verification, UPN suffix configuration, and preparation of the AD environment for synchronisation.
 * **Phase 2: Entra Connect Integration** — Deployment and configuration of Microsoft Entra Connect to bridge local Active Directory with the M365 tenant.
-* **Phase 3: Hybrid Identity & SSO Validation** — Validate that synchronised identities are correctly provisioned and that Hybrid Microsoft Entra ID Join and Seamless SSO configurations provide a seamless authentication experience.
+* **Phase 3: Hybrid Identity & SSO Validation** — Verify identity provisioning and ensure a seamless authentication experience through Hybrid Microsoft Entra ID Join and Seamless SSO.
 
 ## 🚀 Technical Competencies
 * **Hybrid Identity Governance:** Expertise in AD-to-Entra synchronisation, UPN transformations, and attribute level object management.
@@ -24,11 +24,13 @@ This project bridges the gap between on premises Active Directory and modern clo
 * **Administration & Automation:** PowerShell, Entra Admin Center, AD Administrative Center
 
 ## 🌐 Infrastructure Topology
-*[Insert Hybrid Identity Architecture Diagram Here]*
 
-**Architectural Overview:** The environment utilises an Entra Connect sync agent to bridge the laboratory foundation with an Azure based identity control plane. 
-**Note on Security:** This hybrid configuration requires strictly controlled outbound firewall rules on the gateway to allow sync traffic while preventing unauthorised inbound access to the local DC.
+**Architectural Overview:** The environment utilises an Entra Connect sync agent to bridge the laboratory foundation with an Azure-based identity control plane. This diagram illustrates the flow of identity data from the on-premises Active Directory to Microsoft Entra ID, facilitating Hybrid Join for workstations and unified access to Microsoft 365 resources.
 
+**Note on Security:** This hybrid configuration requires strictly controlled outbound firewall rules on the gateway to allow sync traffic (HTTPS/Port 443) while preventing unauthorised inbound access to the local DC.
+<p align="center">
+  <img src="https://i.imgur.com/pvZKHNe.png" alt="Hybrid Identity Architecture Topology" width="800">
+</p>
 ---
 
 ## 🏗️ Phase 1: Hybrid Readiness
@@ -197,7 +199,7 @@ Following the successful configuration, I performed the following verification a
 
 ## ☁️ Phase 3: Hybrid Identity & SSO Validation
 ---
-**Objective:** Validate that synchronised identities are correctly provisioned and that Hybrid Microsoft Entra ID Join and Seamless SSO configurations provide a seamless authentication experience.
+**Objective:** Verify identity provisioning and ensure a seamless authentication experience through Hybrid Microsoft Entra ID Join and Seamless SSO.
 
 ### 3.1 New User Synchronisation
 I created a test user account (`Sync Test`) and initiated a manual delta synchronisation.
