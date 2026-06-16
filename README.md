@@ -29,7 +29,7 @@ This project bridges the gap between on premises Active Directory and modern clo
 
 **Note on Security:** This hybrid configuration requires strictly controlled outbound firewall rules on the gateway to allow sync traffic (HTTPS/Port 443) while preventing unauthorised inbound access to the local DC.
 <p align="center">
-  <img src="https://i.imgur.com/pvZKHNe.png" alt="Hybrid Identity Architecture Topology" width="800">
+  <img src="https://i.imgur.com/Q6IKNK5.png" alt="Hybrid Identity Architecture Topology" width="800">
 </p>
 ---
 
