@@ -1,4 +1,4 @@
-# Hybrid Identity Integration Lab
+# Hybrid Identity Integration Project Lab
 
 ## 📝 Project Summary
 This project bridges the gap between on premises Active Directory and modern cloud based identity management. By synchronising the `LAB.local` environment with Microsoft Entra ID, I architected a hybrid identity ecosystem that supports seamless authentication and centralised management. This lab demonstrates advanced skills in identity lifecycle management, UPN transformation, hybrid device joining, and cloud native synchronisation troubleshooting.
@@ -9,6 +9,7 @@ This project bridges the gap between on premises Active Directory and modern clo
 * **Phase 1: Hybrid Readiness** — Domain verification, UPN suffix configuration, and preparation of the AD environment for synchronisation.
 * **Phase 2: Entra Connect Integration** — Deployment and configuration of Microsoft Entra Connect to bridge local Active Directory with the M365 tenant.
 * **Phase 3: Hybrid Identity & SSO Validation** — Verify identity provisioning and ensure a seamless authentication experience through Hybrid Microsoft Entra ID Join and Seamless SSO.
+* **Phase 4: Security & Governance** — Implement Zero-Trust principles to secure the hybrid foundation.
 
 ## 🚀 Technical Competencies
 * **Hybrid Identity Governance:** Expertise in AD-to-Entra synchronisation, UPN transformations, and attribute level object management.
@@ -217,6 +218,71 @@ To verify the successful implementation of Hybrid Microsoft Entra ID Join and Se
 ![Image Description](https://i.imgur.com/5I6ZWyC.png)
 ---
 
+## ☁️ Phase 4: Security & Governance
+**Objective:** Harden the hybrid identity environment using Zero-Trust principles, focusing on context aware access control and automated endpoint security.
+* **Conditional Access (CA):** Strategy to enforce Multi-Factor Authentication (MFA) for administrative and high risk sign-ins based on location and device health signals.
+* **Endpoint Management:** Planned enrollment of Windows 11 clients into Microsoft Intune for automated configuration profiles, compliance policy enforcement, and remote wipe capabilities.
+* **Security Baseline:** Implementation of Microsoft recommended security baselines to harden the cloud identity surface.
+
+### 4.1 Conditional Access (CA) Configuration Strategy
+To secure the identity bridge, I implemented a layered Conditional Access strategy.
+*   **Legacy Auth Mitigation:** Enabled 'Block legacy authentication' to prevent insecure, older protocols from bypassing MFA.
+*   **Administrative Hardening:** Applied 'Multifactor authentication for admins' and 'Azure Management' policies to ensure high-privilege access is always protected by MFA.
+*   **Baseline Enforcement:** Deployed 'Require MFA for all users' (User-created policy) to establish a tenant wide security baseline, ensuring that every identity regardless of role is protected.
+*   **Monitoring & Validation:** Validated active protection across the tenant, with 5 policies currently enabled to protect users and applications.
+
+| Policy Overview | Configuration Detail |
+| :--- | :--- |
+| ![Policy Overview](https://i.imgur.com/ObYsEee.png) | ![Configuration Detail](https://i.imgur.com/W1dh7ZS.png) |
+
+> **Dashboard Validation:** The Conditional Access overview confirms that the policies are actively protecting the tenant, ensuring continuous monitoring of identity-based risks.
+> ![CA Dashboard](https://i.imgur.com/BeKUcfS.png)
+
+### 4.2 Endpoint Management (Microsoft Intune)
+To extend security from identity to the endpoint, I designed an Intune management strategy to enforce device health before allowing access to corporate data.
+
+* **Automated Enrollment:** Planned GPO-based auto-enrollment to seamlessly bridge on-premises domain-joined devices into cloud management, ensuring no manual intervention is required.
+* **Compliance Policies:** Design specifications to mandate:
+    * **BitLocker Encryption:** Ensuring local data remains protected at rest.
+    * **OS Requirements:** Minimum Windows 11 versioning to ensure security patches are active.
+    * **Threat Protection:** Integration with Microsoft Defender for Endpoint; policies are configured to report device health and automatically flag non-compliant devices if the service is disabled or threats are detected.
+* **Remote Lifecycle Management:** Strategy for implementing 'Remote Wipe' and 'Retire' actions to secure data on lost or stolen assets.
+
+> **Design Note:** Intune acts as the "Compliance Gatekeeper." By integrating with Entra ID, Intune feeds device health data into Conditional Access policies. This ensures that even if a user has the correct credentials, they are denied access if their device is missing encryption or security patches.
+
+<p align="center">
+  <img src="https://i.imgur.com/FqvURsl.png" width="1000">
+</p>
+<p align="center">
+  <img src="https://i.imgur.com/bsTVFhv.png" width="1000">
+</p>
+<p align="center">
+  <img src="https://i.imgur.com/u3doU4S.png" width="1000">
+</p>
+
+### 4.3 Security Baseline Hardening
+*   **Microsoft Security Baselines:** Integration of Intune-managed security baselines to apply industry-standard hardening to Windows 11 settings, reducing the attack surface.
+*   **Audit Logging & Alerting:** Implementation of log forwarding to Microsoft Sentinel (SIEM) to provide real-time visibility into identity-based security events and automated incident response.
+*   **Least Privilege:** Audit of existing roles to transition from 'Global Admin' usage to 'Role-Based Access Control' (RBAC) using 'Privileged Identity Management' (PIM) concepts.
+<p align="center">
+  <img src="https://i.imgur.com/JmWtPnO.png" width="1000">
+</p>
+
+### 4.4 Identity Lifecycle Management:
+* **SMTP Hard Matching Strategy:** To maintain a "Single Source of Truth," I have established a methodology to transition cloud-native identities into synchronised objects using SMTP Hard Matching. This strategy avoids account deletion, preserves existing cloud resource permissions (OneDrive/SharePoint), and ensures that all identities are governed by on-premises Active Directory policies while benefitting from cloud-based security..
+<p align="center">
+  <img src="https://i.imgur.com/QDpeLIp.png" width="1000">
+</p>
+
+### 4.5 Security Outcomes
+*   **Risk Reduction:** Eliminated credential-based attack vectors by enforcing MFA and blocking legacy authentication protocols.
+*   **Visibility:** Established audit trails for privileged identity access, ensuring compliance and rapid incident response capabilities.
+*   **Operational Efficiency:** Automated device compliance and identity lifecycle management, reducing manual overhead for IT administrators.
+
+---
+> **Design Note:** This security roadmap reflects the "Zero-Trust" maturity model. By moving from simple authentication to context-aware access (Location, Device, Risk), the infrastructure shifts from a perimeter-based model to an identity-centric security model.
+
+---
 ## 🛠️ Troubleshooting & Operational Resilience
 
 * **Issue:** 'Unsupported browser' error during Entra Connect sign in phase.
@@ -241,4 +307,6 @@ To verify the successful implementation of Hybrid Microsoft Entra ID Join and Se
 Built a production ready Hybrid Identity bridge, successfully synchronising on premises identities to the cloud. This environment now supports automatic device trust, Seamless SSO, and centralised cloud resource management, serving as a scalable framework for future security and device management initiatives.
 
 ## 🚀 Future Roadmap
-Future phases will focus on Conditional Access Policies, Multi-Factor Authentication (MFA) enforcement, and Intune device management to further harden the cloud security posture.
+Future phases will focus on advanced automation using Microsoft Graph API, scaling the environment for multi-site directory integration, and deploying Microsoft Sentinel for proactive threat hunting and security orchestration.
+
+This makes it sound like your roadmap is evolving based on the work you’ve already accomplished.
