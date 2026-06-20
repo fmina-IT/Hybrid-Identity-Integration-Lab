@@ -216,9 +216,10 @@ To verify the successful implementation of Hybrid Microsoft Entra ID Join and Se
 * **Result:** The system authenticated automatically using domain credentials without requiring manual password entry.
 ![Image Description](https://i.imgur.com/vLGY1W1.png)
 ![Image Description](https://i.imgur.com/5I6ZWyC.png)
----
 
+---
 ## ☁️ Phase 4: Security & Governance
+---
 **Objective:** Harden the hybrid identity environment using Zero-Trust principles, focusing on context aware access control and automated endpoint security.
 * **Conditional Access (CA):** Strategy to enforce Multi-Factor Authentication (MFA) for administrative and high risk sign-ins based on location and device health signals.
 * **Endpoint Management:** Planned enrollment of Windows 11 clients into Microsoft Intune for automated configuration profiles, compliance policy enforcement, and remote wipe capabilities.
@@ -304,8 +305,13 @@ To extend security from identity to the endpoint, I designed an Intune managemen
 ---
 
 ## 🏁 Summary of Outcomes
-Built a production ready Hybrid Identity bridge, successfully synchronising on premises identities to the cloud. This environment now supports automatic device trust, Seamless SSO, and centralised cloud resource management, serving as a scalable framework for future security and device management initiatives.
+Successfully architected and deployed a production-ready Hybrid Identity ecosystem, bridging `LAB.local` with Microsoft Entra ID. This environment now facilitates:
 
+* **Identity Continuity:** Implemented Seamless SSO and automated synchronisation, enabling a friction-free user experience.
+* **Security & Governance:** Hardened the identity surface through Conditional Access, MFA, and Intune-managed security baselines.
+* **Operational Maturity:** Established a scalable, Zero-Trust framework capable of supporting advanced device lifecycle management and proactive threat detection.
+
+---
 ## 🚀 Future Roadmap
 Future phases will focus on advanced automation using Microsoft Graph API, scaling the environment for multi-site directory integration, and deploying Microsoft Sentinel for proactive threat hunting and security orchestration.
 
